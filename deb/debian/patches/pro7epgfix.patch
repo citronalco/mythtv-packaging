@@ -1,0 +1,61 @@
+diff --git a/mythtv/libs/libmythtv/eitfixup.cpp b/mythtv/libs/libmythtv/eitfixup.cpp
+index 9bce58384d..acd0e57c67 100644
+--- a/mythtv/libs/libmythtv/eitfixup.cpp
++++ b/mythtv/libs/libmythtv/eitfixup.cpp
+@@ -1749,6 +1749,56 @@ void EITFixUp::FixPRO7(DBEventEIT &event)
+                                 match.capturedLength(0));
+     }
+ 
++    /* strip repeat */
++    static const QRegularExpression pro7Repeat
++        { R"(\s*\(WH vom \w+, \d{2}\.\d{2}\.\d{4}, \d{2}:\d{2} Uhr\)\s*$)" };
++    match = pro7Repeat.match(event.m_description);
++    if (match.hasMatch())
++    {
++        event.m_previouslyshown = true;
++        event.m_description.remove(match.capturedStart(), match.capturedLength());
++        event.m_description = event.m_description.trimmed();
++
++        // TODO(?):
++        /*
++        bool ok = false;
++        uint y = match.captured(3).toUInt(&ok);
++        if (ok)
++        {
++            event.m_originalairdate = QDate(y, 1, 1);
++            event.m_airdate = y;
++            event.m_previouslyshown = true;
++        }
++        */
++    }
++
++    /* handle category, original airdate, program rating */
++    static const QRegularExpression pro7CategoryOriginalairdateRating
++        { R"(\s+(\S+), ([A-Z]{1,3}) (\d{4}) Altersfreigabe: ab (\d+)\s*$)" };
++    match = pro7CategoryOriginalairdateRating.match(event.m_description);
++    if (match.hasMatch())
++    {
++        event.m_category = match.captured(1);
++
++        //event.m_country = match.captured(2);
++
++        bool ok = false;
++        uint y = match.captured(3).toUInt(&ok);
++        if (ok)
++        {
++            event.m_originalairdate = QDate(y, 1, 1);
++            event.m_airdate = y;
++            event.m_previouslyshown = true;
++        }
++
++        EventRating prograting;
++        prograting.m_system="DE"; prograting.m_rating = match.captured(4);
++        event.m_ratings.push_back(prograting);
++
++        event.m_description.remove(match.capturedStart(), match.capturedLength());
++        event.m_description = event.m_description.trimmed();
++    }
++
+     /* handle cast, the very last in description */
+     static const QRegularExpression pro7Cast { "\n\nDarsteller:\n(.*)$",
+         QRegularExpression::DotMatchesEverythingOption };

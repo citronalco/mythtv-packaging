@@ -4,3 +4,4 @@ default_directories
 ##mythtv##
 bindings_install_paths.patch
 default_theme.patch
+pro7epgfix.patch
