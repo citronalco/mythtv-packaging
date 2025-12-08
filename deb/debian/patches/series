@@ -2,5 +2,6 @@
 default_directories
 
 ##mythtv##
+eitfixes.patch
 bindings_install_paths.patch
 default_theme.patch
