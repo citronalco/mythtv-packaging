@@ -5,13 +5,13 @@ Subject: [PATCH] Apache, PHP: increase max_input_vars
 
 Fixes https://github.com/MythTV/mythweb/issues/38
 ---
- mythtv/mythplugins/mythweb/mythweb.conf.apache | 1 +
+ mythplugins/mythweb/mythweb.conf.apache | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/mythtv/mythplugins/mythweb/mythweb.conf.apache b/mythtv/mythplugins/mythweb/mythweb.conf.apache
+diff --git a/mythplugins/mythweb/mythweb.conf.apache b/mythplugins/mythweb/mythweb.conf.apache
 index c5da6061..4c839450 100644
---- a/mythtv/mythplugins/mythweb/mythweb.conf.apache
-+++ b/mythtv/mythplugins/mythweb/mythweb.conf.apache
+--- a/mythplugins/mythweb/mythweb.conf.apache
++++ b/mythplugins/mythweb/mythweb.conf.apache
 @@ -106,6 +106,7 @@
      #
  

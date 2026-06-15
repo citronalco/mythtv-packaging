@@ -5,13 +5,13 @@ Subject: [PATCH] Do not use Google's CDN by default.
 
 All required JS libraries come with MythWeb.
 ---
- mythtv/mythplugins/mythweb/includes/db_update.php | 2 +-
+ mythplugins/mythweb/includes/db_update.php | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/mythtv/mythplugins/mythweb/includes/db_update.php b/mythtv/mythplugins/mythweb/includes/db_update.php
+diff --git a/mythplugins/mythweb/includes/db_update.php b/mythplugins/mythweb/includes/db_update.php
 index 63ece990..e970a9df 100644
---- a/mythtv/mythplugins/mythweb/includes/db_update.php
-+++ b/mythtv/mythplugins/mythweb/includes/db_update.php
+--- a/mythplugins/mythweb/includes/db_update.php
++++ b/mythplugins/mythweb/includes/db_update.php
 @@ -61,7 +61,7 @@
                  setting('WebDBSchemaVer',    null, ++$db_vers, false);
  
