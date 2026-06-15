@@ -1,0 +1,26 @@
+From ff2b5cf24a5d42b995e39ea5ffec0d6312934327 Mon Sep 17 00:00:00 2001
+From: Bernhard Geier <2651739+citronalco@users.noreply.github.com>
+Date: Sun, 14 Jun 2026 21:37:30 +0200
+Subject: [PATCH] Do not use Google's CDN by default.
+
+All required JS libraries come with MythWeb.
+---
+ mythtv/mythplugins/mythweb/includes/db_update.php | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/mythtv/mythplugins/mythweb/includes/db_update.php b/mythtv/mythplugins/mythweb/includes/db_update.php
+index 63ece990..e970a9df 100644
+--- a/mythtv/mythplugins/mythweb/includes/db_update.php
++++ b/mythtv/mythplugins/mythweb/includes/db_update.php
+@@ -61,7 +61,7 @@
+                 setting('WebDBSchemaVer',    null, ++$db_vers, false);
+ 
+             case 4:
+-                setting('mythweb_use_cdn', null, true);
++                setting('mythweb_use_cdn', null, false);
+                 setting('WebDBSchemaVer',    null, ++$db_vers, false);
+ 				
+         // All other numbers should run their changes sequentially
+-- 
+GitLab
+

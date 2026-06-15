@@ -7,3 +7,6 @@ bindings_install_paths.patch
 default_theme.patch
 
 ##mythweb##
+mythweb_masterserverip.patch
+mythweb_php_max_input_vars.patch
+mythweb_use_cdn_false.patch
