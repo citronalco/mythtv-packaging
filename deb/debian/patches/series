@@ -2,6 +2,8 @@
 default_directories
 
 ##mythtv##
-eitfixes.patch
+eitfixes_vodafone_germany_dvbc.patch
 bindings_install_paths.patch
 default_theme.patch
+
+##mythweb##
