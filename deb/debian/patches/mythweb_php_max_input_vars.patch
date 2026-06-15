@@ -1,0 +1,25 @@
+From d5aa5fbcc4adf804b7d4cded4984502c6a9c8948 Mon Sep 17 00:00:00 2001
+From: Bernhard Geier <2651739+citronalco@users.noreply.github.com>
+Date: Sun, 14 Jun 2026 20:05:35 +0200
+Subject: [PATCH] Apache, PHP: increase max_input_vars
+
+Fixes https://github.com/MythTV/mythweb/issues/38
+---
+ mythplugins/mythweb/mythweb.conf.apache | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/mythplugins/mythweb/mythweb.conf.apache b/mythplugins/mythweb/mythweb.conf.apache
+index c5da6061..4c839450 100644
+--- a/mythplugins/mythweb/mythweb.conf.apache
++++ b/mythplugins/mythweb/mythweb.conf.apache
+@@ -106,6 +106,7 @@
+     #
+ 
+         <Files *.php>
++            php_value max_input_vars                30000
+ 
+         #  These settings are intended for apache 2.x.  If your version of apache
+         #  doesn't support php_value, or things like memory_limit aren't working
+-- 
+GitLab
+
