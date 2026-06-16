@@ -1,0 +1,23 @@
+From 757a943064aa77782962e15c281028ca6ce95f27 Mon Sep 17 00:00:00 2001
+From: Mark Brehon <mbrehon@comcast.net>
+Date: Tue, 17 May 2022 09:15:41 -0600
+Subject: [PATCH] fix stopRecording() -- only seems to be invoked when
+ cancelling a schedule with a *currently ongoing* recording.
+
+---
+ mythplugins/mythweb/modules/tv/classes/Program.php | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/mythplugins/mythweb/modules/tv/classes/Program.php b/mythplugins/mythweb/modules/tv/classes/Program.php
+index f3898dab..bd261720 100644
+--- a/mythplugins/mythweb/modules/tv/classes/Program.php
++++ b/mythplugins/mythweb/modules/tv/classes/Program.php
+@@ -765,7 +765,7 @@ public static function categories() {
+     public function stopRecording() {
+         if ($this->recstatus != 'Recording')
+             return false;
+-        MythBackend::find()->sendCommand(array('STOP_RECORDING', $prog->backend_row(), '0'));
++        MythBackend::find()->sendCommand(array('STOP_RECORDING', $this->backend_row(), '0'));
+         return true;
+     }
+ 

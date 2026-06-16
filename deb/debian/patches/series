@@ -10,3 +10,5 @@ default_theme.patch
 mythweb_masterserverip.patch
 mythweb_php_max_input_vars.patch
 mythweb_use_cdn_false.patch
+mythweb_fix_forget_old.patch
+mythweb_fix_stoprecording.patch
