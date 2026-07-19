@@ -2,5 +2,13 @@
 default_directories
 
 ##mythtv##
+eitfixes_vodafone_germany_dvbc.patch
 bindings_install_paths.patch
 default_theme.patch
+
+##mythweb##
+mythweb_masterserverip.patch
+mythweb_php_max_input_vars.patch
+mythweb_use_cdn_false.patch
+mythweb_fix_forget_old.patch
+mythweb_fix_stoprecording.patch

@@ -1,0 +1,59 @@
+From 4401ef555f89667d373ecfd2563f892d99c635f6 Mon Sep 17 00:00:00 2001
+From: Bernhard Geier <2651739+citronalco@users.noreply.github.com>
+Date: Sun, 14 Jun 2026 19:30:20 +0200
+Subject: [PATCH] Replace MasterServerIP with MasterServerName
+
+Fixes blank "Backend Status" page on fresh installs
+
+Fixes https://github.com/MythTV/mythweb/issues/89
+---
+ mythplugins/mythweb/modules/music/stream.php   | 3 ++-
+ mythplugins/mythweb/modules/status/handler.php | 3 ++-
+ mythplugins/mythweb/modules/video/stream.php   | 3 ++-
+ 3 files changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/mythplugins/mythweb/modules/music/stream.php b/mythplugins/mythweb/modules/music/stream.php
+index 88b38fc2..ee2ce0fe 100644
+--- a/mythplugins/mythweb/modules/music/stream.php
++++ b/mythplugins/mythweb/modules/music/stream.php
+@@ -95,7 +95,8 @@
+     }
+ // Otherwise, send it via the backend
+     else {
+-        $Master_Host = setting('MasterServerIP');
++        $Master_Host _or(preg_replace('@(.*?:.*)@', "[$1]",
++                         setting('MasterServerName')), "127.0.0.1");
+         $port = _or(get_backend_setting('BackendStatusPort', $Master_Host),
+                     get_backend_setting('BackendStatusPort'));
+         if (stripos($Master_Host,':') !== false) {
+diff --git a/mythplugins/mythweb/modules/status/handler.php b/mythplugins/mythweb/modules/status/handler.php
+index 0ad2852b..6ec6fcf0 100644
+--- a/mythplugins/mythweb/modules/status/handler.php
++++ b/mythplugins/mythweb/modules/status/handler.php
+@@ -11,7 +11,8 @@
+  **/
+ 
+ // Get the address/port of the master machine, enclose IPv6 with []
+-    $masterhost = preg_replace('@(.*?:.*)@', "[$1]", setting('MasterServerIP'));
++    $masterhost = _or(preg_replace('@(.*?:.*)@', "[$1]",
++                      setting('MasterServerName')), "127.0.0.1");
+     $statusport = setting('BackendStatusPort', '%');
+ 
+ // XML mode?
+diff --git a/mythplugins/mythweb/modules/video/stream.php b/mythplugins/mythweb/modules/video/stream.php
+index d7dc0696..05ed2fa5 100644
+--- a/mythplugins/mythweb/modules/video/stream.php
++++ b/mythplugins/mythweb/modules/video/stream.php
+@@ -58,7 +58,8 @@
+     header('Content-Disposition: filename="'.$fname.'"');
+ 
+ // Send data via the backend
+-    $Master_Host = setting('MasterServerIP');
++    $Master_Host = _or(preg_replace('@(.*?:.*)@', "[$1]",
++                      setting('MasterServerName')), "127.0.0.1");
+     $port = _or(get_backend_setting('BackendStatusPort', $Master_Host),
+                 get_backend_setting('BackendStatusPort'));
+     if (stripos($Master_Host,':') !== false) {
+-- 
+GitLab
+
