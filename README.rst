@@ -9,13 +9,16 @@ All directories contain scripts for building for the following distributions:
  - OSX
  - Windows
 
-===
+
+====
 Changes by Citronalco:
-===
+====
 
 Only for building Ubuntu/Debian (.deb) packages:
 
 Update MythWeb with some patches, and re-enable building MythWeb debian package.
+
+Branches: fixes/34, fixes/35, fixes/36 
 
 Included patches:
  - mythweb_fix_forget_old.patch: Fix clicking on "Forget old"
